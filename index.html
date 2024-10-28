@@ -2,23 +2,20 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReTro Forum</title>
     <!-- Daisy UI and Tailwind Setup -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./styles/retro.css">
-
+    <link rel="stylesheet" href="./styles/retro.css" />
 </head>
 
 <body class="font-mulish">
     <header class="mx-auto w-11/12 max-w-6xl">
-
         <!-- nav bar -->
-        <nav class="mt-4 border-solid border-red-400 border-4 ">
+        <nav class="mt-4">
             <div class="flex justify-between items-center">
-
                 <div>
                     <h2 class="text-[#12132D] text-lg lg:text-4xl font-black">ReTro</h2>
                 </div>
@@ -26,22 +23,22 @@
                 <div class="flex justify-between items-center">
                     <div class="tooltip" data-tip="Home">
                         <button class="btn btn-ghost btn-circle">
-                            <img src="./images/home.png" alt="">
+                            <img src="./images/home.png" alt="" />
                         </button>
                     </div>
                     <div class="tooltip" data-tip="Edit">
                         <button class="btn btn-ghost btn-circle">
-                            <img src="./images/edit.png" alt="">
+                            <img src="./images/edit.png" alt="" />
                         </button>
                     </div>
                     <div class="tooltip" data-tip="Add">
                         <button class="btn btn-ghost btn-circle">
-                            <img src="./images/add.png" alt="">
+                            <img src="./images/add.png" alt="" />
                         </button>
                     </div>
                     <div class="tooltip" data-tip="Flag">
                         <button class="btn btn-ghost btn-circle">
-                            <img src="./images/flag.png" alt="">
+                            <img src="./images/flag.png" alt="" />
                         </button>
                     </div>
 
@@ -51,57 +48,62 @@
                             Sign In
                         </button>
                     </div>
-
                 </div>
             </div>
         </nav>
-
-        <!-- Welcome Section -->
-        <div
-            class="bg-[url('images/bgbanner.png') bg-[#12132D] bg-grad p-24 rounded-3xl my-10 flex justify-between hidden">
-            <div class="border-red-300 border-4 mt-5">
-                <h2 class="font-black text-5xl text-[#FFF]">Welcome to the<br><span>ReTro</span> Forum</h2>
-                <p class="font-medium text-xl text-white">Share your favorite opinion and win and wp <br> forum coffee
-                    mug!</p>
-                <div class=" bg-white  rounded-3xl px-3 py-1">
-                    <input class="p-2 border-none outline-none" type="text" placeholder="Search here anything">
-                    <button class="bg-[#797DFC] rounded-3xl py-1 px-2 text-white">Search</button>
-                </div>
-            </div>
-
-            <div class="font-medium  p-10 w-2/4 rounded-2xl mt-5 bg-white">
-                <div class="flex justify-between">
-                    <p>Registered Users</p>
-                    <p>01</p>
-                </div>
-                <div class="flex justify-between">
-                    <p>Forum</p>
-                    <p>05</p>
-                </div>
-                <div class="flex justify-between">
-                    <p>Topics</p>
-                    <p>01</p>
-                </div>
-                <div class="flex justify-between">
-                    <p>Replies</p>
-                    <p>01</p>
-                </div>
-            </div>
-        </div>
-
-
-
     </header>
 
-    <main>
+    <main class="mx-auto w-11/12 max-w-6xl">
+        <!-- Welcome Section -->
+        <section class="bg-[url('./images/bgbanner.png')] bg-no-repeat bg-bottom my-10">
+            <div
+                class="bg-gradient-to-b from-[#12132D] to-blue-950 p-1 lg:p-20 rounded-3xl flex flex-col lg:flex-row justify-around items-center">
+                <div class="space-y-7 lg:space-y-10 w-11/12 lg:w-1/2 flex flex-col items-center lg:items-start">
+                    
+                    <h2 class="font-semibold lg:font-black text-2xl lg:text-5xl text-[#FFF]">
+                        Welcome to the<br /><span class="text-[#797DFC]">ReTro</span>
+                        Forum
+                    </h2>
 
+                    <p class="font-medium text-xl text-white text-center lg:text-start">
+                        Share your favorite opinion and win and wp <br />
+                        forum coffee mug!
+                    </p>
 
+                    <div
+                        class="flex flex-col lg:flex-row lg:justify-between gap-3 w-3/4 lg:bg-white rounded-3xl px-3 lg:px-3 py-1">
+                        <input class="rounded-xl p-2  outline-none" type="text"
+                            placeholder="Search here anything" />
+                        <button
+                            class="bg-[#4045e2] hover:bg-[#05b8a0] font-bold rounded-xl lg:rounded-3xl py-2 lg:py-1 px-6 text-white">
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+                <div class="h-full space-y-3 w-3/4 lg:w-1/3 font-medium p-8 my-4 rounded-2xl bg-white">
+                    <div class="flex justify-between">
+                        <p>Registered Users</p>
+                        <p>01</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p>Forum</p>
+                        <p>05</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p>Topics</p>
+                        <p>01</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <p>Replies</p>
+                        <p>01</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <footer>
-
-    </footer>
-
+    <footer></footer>
 
     <script src="./js/retro.js"></script>
 </body>
