@@ -30,12 +30,19 @@ const displayPosts = (posts) => {
 
     posts.forEach(post => {
         console.log(post);
+        let indicator;
+        if(post.isActive === true) {
+            indicator = 'badge-success'
+        }
+        else{
+            indicator = 'badge-error'
+        }
         const div = document.createElement('div');
         div.className = `flex flex-col lg:flex-row justify-start gap-6 lg:gap-10 rounded-2xl p-8 bg-[#797dfc1a] items-center lg:items-start`;
         div.innerHTML = `
         <!-- indicator -->
         <div class="avatar indicator">
-            <span class="indicator-item badge badge-success"></span>
+            <span class="indicator-item badge ${indicator}"></span>
             <div class="h-20 w-20 rounded-lg">
                 <img alt="Tailwind CSS examples"
                     src= ${post.image} />
