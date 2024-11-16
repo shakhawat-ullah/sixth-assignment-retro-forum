@@ -29,12 +29,11 @@ const displayPosts = (posts) => {
     // cardsContainer.innerHTML = "";
 
     posts.forEach(post => {
-        console.log(post);
         let indicator;
-        if(post.isActive === true) {
+        if (post.isActive === true) {
             indicator = 'badge-success'
         }
-        else{
+        else {
             indicator = 'badge-error'
         }
         const div = document.createElement('div');
@@ -92,4 +91,58 @@ const displayPosts = (posts) => {
         cardsContainer.appendChild(div);
 
     });
+}
+
+
+const loadLatestPost = async () => {
+    const url = `https://openapi.programming-hero.com/api/retro-forum/latest-posts`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const latestPosts = data;
+
+    displayLatestPosts(latestPosts);
+
+}
+
+loadLatestPost();
+
+
+const displayLatestPosts = (latestPosts) => {
+
+    const latestPostContainer = document.getElementById('latest-post-container');
+    latestPosts.forEach((latestItem) => {
+        console.log(latestItem);
+        const div = document.createElement('div');
+        div.className = `p-6 rounded-lg space-y-3 border-2 border-gray-300`;
+        div.innerHTML = `
+        <!-- Card Cover Image -->
+        <div class="w-full">
+            <img class="rounded-lg" src=${latestItem.cover_image} alt="">
+
+        </div>
+
+        <div class="space-y-4">
+            <div class="flex gap-2 items-center">
+                <img src="./images/calendar.png" alt="">
+                <p class="font-normal text-base text-gray-700">${latestItem.author?.posted_date ?? 'No publish date'}</p>
+            </div>
+            <div class="space-y-3">
+                <h5 class="font-extrabold text-[#12132D] text-base lg:text-lg">${latestItem.title.slice(0,32)}</h5>
+                <p class="font-normal text-base text-gray-700">${latestItem.description}</p>
+            </div>
+            <!-- Author Description -->
+            <div class="flex gap-4 items-center">
+                <div class="w-1/6">
+                    <img class="rounded-full"
+                        src=${latestItem.profile_image} alt="">
+                </div>
+                <div>
+                    <h5 class="font-bold text-[#12132D] text-base">${latestItem.author.name}</h5>
+                    <p class="font-normal text-sm text-gray-700">${latestItem.author?.designation ?? 'Unknown'}</p>
+                </div>
+            </div>
+        </div>
+        `
+        latestPostContainer.appendChild(div);
+    })
 }
