@@ -1,19 +1,24 @@
-/* API
-LatestPosts: - https://openapi.programming-hero.com/api/retro-forum/latest-posts
 
-AllPosts: - https://openapi.programming-hero.com/api/retro-forum/posts
+const toggleLoadingSpinner = (isLoading) => {
+    const loadingSpinner = document.getElementsByClassName('spinner');
+    for (const loadItem of loadingSpinner) {
+        if (isLoading) {
+            loadItem.classList.remove('hidden');
+        }
 
-PostSearchByQuery
-PostByQuery: - https://openapi.programming-hero.com/api/retro-forum/posts?category=categoryName
+        else {
+            loadItem.classList.add('hidden');
+        }
+    }
 
-Example
-PostByQuery: - https://openapi.programming-hero.com/api/retro-forum/posts?category=coding 
+}
 
-*/
+toggleLoadingSpinner(true);
 
 
-const loadPost = async () => {
-    const url = `https://openapi.programming-hero.com/api/retro-forum/posts`;
+const loadPost = async (searchText) => {
+
+    const url = `https://openapi.programming-hero.com/api/retro-forum/posts?category=${searchText}`;
     const res = await fetch(url);
     const data = await res.json();
     const posts = data.posts;
@@ -22,13 +27,14 @@ const loadPost = async () => {
 
 }
 
-loadPost();
+loadPost('');
 
 const displayPosts = (posts) => {
     const cardsContainer = document.getElementById('cards-container');
-    // cardsContainer.innerHTML = "";
+    cardsContainer.innerHTML = "";
 
     posts.forEach(post => {
+
         let indicator;
         if (post.isActive === true) {
             indicator = 'badge-success'
@@ -81,7 +87,9 @@ const displayPosts = (posts) => {
                 </div>
                 <!-- email icon -->
                 <div>
-                    <img src="./images/email.png" alt="">
+                    <button onclick="markRead('${post.title}', '${post.view_count}' )">
+                        <img src="./images/email.png" alt="">
+                    </button>
                 </div>
             </div>
 
@@ -91,6 +99,33 @@ const displayPosts = (posts) => {
         cardsContainer.appendChild(div);
 
     });
+
+
+}
+
+const increaseMarkCount = () => {
+    const readCount = document.getElementById('read-count');
+    const readCountValue = readCount.innerText;
+    const convertedReadCountValue = parseInt(readCountValue);
+    const readCountNewValue = convertedReadCountValue + 1;
+    readCount.innerText = readCountNewValue;
+}
+
+const markRead = (title, view_count) => {
+
+    const markReadContainer = document.getElementById('mark-read-container');
+    const div = document.createElement('div');
+    div.className = `py-4 pl-2 lg:pl-5 pr-10 lg:pr-0 rounded-lg flex items-center bg-white gap-2 lg:gap-10`
+    div.innerHTML = `
+    <h4 class="font-semibold text-base text-[#12132D]">${title.slice(0, 30)}</h4>
+    <div class="flex gap-2 items-center">
+        <img src="./images/eye.png" alt="">
+        <p>${view_count}</p>
+    </div>
+
+    `
+    markReadContainer.appendChild(div);
+    increaseMarkCount();
 }
 
 
@@ -103,15 +138,12 @@ const loadLatestPost = async () => {
     displayLatestPosts(latestPosts);
 
 }
-
 loadLatestPost();
-
 
 const displayLatestPosts = (latestPosts) => {
 
     const latestPostContainer = document.getElementById('latest-post-container');
     latestPosts.forEach((latestItem) => {
-        console.log(latestItem);
         const div = document.createElement('div');
         div.className = `p-6 rounded-lg space-y-3 border-2 border-gray-300`;
         div.innerHTML = `
@@ -127,7 +159,7 @@ const displayLatestPosts = (latestPosts) => {
                 <p class="font-normal text-base text-gray-700">${latestItem.author?.posted_date ?? 'No publish date'}</p>
             </div>
             <div class="space-y-3">
-                <h5 class="font-extrabold text-[#12132D] text-base lg:text-lg">${latestItem.title.slice(0,32)}</h5>
+                <h5 class="font-extrabold text-[#12132D] text-base lg:text-lg">${latestItem.title.slice(0, 32)}</h5>
                 <p class="font-normal text-base text-gray-700">${latestItem.description}</p>
             </div>
             <!-- Author Description -->
@@ -144,5 +176,18 @@ const displayLatestPosts = (latestPosts) => {
         </div>
         `
         latestPostContainer.appendChild(div);
-    })
+    });
+    toggleLoadingSpinner(false);
 }
+
+const handleSearch = () => {
+    const searchField = document.getElementById('searchField');
+    const searchText = searchField.value;
+    console.log(searchText);
+    loadPost(searchText);
+    searchField.value = '';
+}
+
+
+
+
